@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title> Quiz</title>
+  <title>Quiz Game</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="container">
-  <h1>Welcome to the Quiz</h1>
-
-  <div id="question-container">
-    <h2 id="question"></h2>
-    <div id="options"></div>
-    <p id="result" style="display: none;"></p>
-    <p id="remaining-questions"></p>
-    <p id="timer"></p>
+  <div class="quiz-container">
+    <h1>Quiz Game</h1>
+    <div id="timer">Time: <span id="countdown"></span></div>
+    <button id="start-btn">Start</button>
+    <div id="question-container" class="hide">
+      <p id="question"></p>
+      <button class="answer-btn">Option 1</button>
+      <button class="answer-btn">Option 2</button>
+      <button class="answer-btn">Option 3</button>
+      <button class="answer-btn">Option 4</button>
+    </div>
+    <div id="end-container" class="hide">
+      <h2>Game Over!</h2>
+      <p>Your score: <span id="final-score"></span></p>
+      <form id="initials-form">
+        <label for="initials">Enter Initials:</label>
+        <input type="text" id="initials" maxlength="3">
+        <button type="submit">Save</button>
+      </form>
+    </div>
   </div>
-
-  <div id="end-screen" style="display: none;">
-    <h2>Game Over!</h2>
-    <p id="score"></p>
-    <button id="play-again-btn" style="display: none;">Play Again</button>
-    <button id="scoreboard-btn">View Scoreboard</button>
-  </div>
-</div>
-
-<script src="questions.js"></script>
-<script src="script.js"></script>
+  
+  <script src="script.js"></script>
 </body>
 </html>

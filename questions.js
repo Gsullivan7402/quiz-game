@@ -1,49 +1,94 @@
 
 const questions = [
     {
-      question: 'What is the result of 2 + 2?',
-      options: ['4', '3', '5', '6'],
-      answer: '4'
+      question: 'What symbol is used for comments in JavaScript?',
+      answers: [
+        { text: '//', correct: true },
+        { text: '/* */', correct: false },
+        { text: '--', correct: false },
+        { text: '**', correct: false }
+      ]
     },
     {
-      question: 'Which of the following is a programming language?',
-      options: ['CPU', 'RAM', 'Python', 'GPU'],
-      answer: 'Python'
+      question: 'Which function is used to print content in the console in JavaScript?',
+      answers: [
+        { text: 'console.log()', correct: true },
+        { text: 'print()', correct: false },
+        { text: 'display()', correct: false },
+        { text: 'log()', correct: false }
+      ]
     },
     {
       question: 'What does HTML stand for?',
-      options: [
-        'Hyper Transfer Markup Language',
-        'Hyper Text Markup Language',
-        'Hyperlinks and Text Markup Language',
-        'Home Tool Markup Language'
-      ],
-      answer: 'Hyper Text Markup Language'
+      answers: [
+        { text: 'Hyper Trainer Marking Language', correct: false },
+        { text: 'Hyper Text Markup Language', correct: true },
+        { text: 'Hyperlinks and Text Markup Language', correct: false },
+        { text: 'Home Tool Markup Language', correct: false }
+      ]
     },
     {
-      question: 'What is the purpose of CSS?',
-      options: [
-        'To perform calculations in web development',
-        'To structure and layout web pages',
-        'To create dynamic content on websites',
-        'To define the styling and appearance of web pages'
-      ],
-      answer: 'To define the styling and appearance of web pages'
+      question: 'Which HTML tag is used for creating an unordered list?',
+      answers: [
+        { text: '<ul>', correct: true },
+        { text: '<ol>', correct: false },
+        { text: '<li>', correct: false },
+        { text: '<list>', correct: false }
+      ]
     },
     {
-      question: 'Which programming language is often used for building Android applications?',
-      options: ['Swift', 'Java', 'C++', 'Python'],
-      answer: 'Java'
+      question: 'Which CSS property is used to change the text color of an element?',
+      answers: [
+        { text: 'color', correct: true },
+        { text: 'text-color', correct: false },
+        { text: 'font-color', correct: false },
+        { text: 'text-style', correct: false }
+      ]
     },
     {
-      question: 'What is the output of the following JavaScript code snippet?\nconsole.log(2 + \'2\' + 2);',
-      options: ['222', '6', '4', '22'],
-      answer: '22'
+      question: 'In JavaScript, what is a variable?',
+      answers: [
+        { text: 'A method', correct: false },
+        { text: 'A data type', correct: false },
+        { text: 'A container for storing data values', correct: true },
+        { text: 'A function', correct: false }
+      ]
     },
     {
-      question: 'Which data structure uses the principle of Last In First Out (LIFO)?',
-      options: ['Queue', 'Stack', 'Linked List', 'Tree'],
-      answer: 'Stack'
-    }
-    // Add more questions as needed...
+      question: 'Which symbol is used to access jQuery?',
+      answers: [
+        { text: '$', correct: true },
+        { text: '#', correct: false },
+        { text: '.', correct: false },
+        { text: '@', correct: false }
+      ]
+    },
+    {
+      question: 'What is the correct syntax for an if statement in JavaScript?',
+      answers: [
+        { text: 'if i = 5 then', correct: false },
+        { text: 'if (i == 5)', correct: true },
+        { text: 'if i = 5', correct: false },
+        { text: 'if i == 5 then', correct: false }
+      ]
+    },
+    {
+      question: 'Which operator is used for strict equality comparison in JavaScript?',
+      answers: [
+        { text: '==', correct: false },
+        { text: '===', correct: true },
+        { text: '=', correct: false },
+        { text: '!=', correct: false }
+      ]
+    },
+    {
+      question: 'What is the purpose of the `href` attribute in HTML?',
+      answers: [
+        { text: 'To define the header of a page', correct: false },
+        { text: 'To specify the style of an element', correct: false },
+        { text: 'To indicate the hypertext link destination', correct: true },
+        { text: 'To create a horizontal rule', correct: false }
+      ]
+    },
+    // Add more questions...
   ];
