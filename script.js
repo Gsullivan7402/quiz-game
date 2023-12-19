@@ -109,7 +109,6 @@ const questions = [
   },
   // Add more questions...
 ];
-
 startButton.addEventListener('click', startGame);
 playAgainButton.addEventListener('click', restartGame);
 initialsForm.addEventListener('submit', saveScore);
@@ -191,10 +190,14 @@ function restartGame() {
 
 function saveScore(event) {
   event.preventDefault();
+  console.log("Form submitted"); // Debug log
+
   const initials = initialsInput.value.trim();
+  console.log("Initials:", initials); // Debug log
+
   if (!initials) {
-    console.log("No initials provided.");
-    return; // Prevent saving if initials are empty
+    alert("Please enter your initials.");
+    return;
   }
 
   const savedScores = JSON.parse(localStorage.getItem('quizScores')) || [];
@@ -210,11 +213,8 @@ function saveScore(event) {
 
   localStorage.setItem('quizScores', JSON.stringify(savedScores));
   
-  console.log("Saved score:", currentScore);
   displayScoreboard();
 }
-
-
 
 function displayScoreboard() {
   const savedScores = JSON.parse(localStorage.getItem('quizScores')) || [];
@@ -226,6 +226,8 @@ function displayScoreboard() {
   scoreboard.classList.add('scoreboard');
 
   savedScores.slice(0, 6).forEach(scoreEntry => {
+    console.log("Score entry:", scoreEntry); // Log the entire score entry for debugging
+
     if (scoreEntry && typeof scoreEntry === 'object' && 'initials' in scoreEntry && 'score' in scoreEntry) {
       const scoreItem = document.createElement('li');
       scoreItem.textContent = `${scoreEntry.initials}: ${scoreEntry.score}`;
@@ -240,4 +242,3 @@ function displayScoreboard() {
   scoreboardContainer.appendChild(scoreboard);
   scoreboardContainer.classList.remove('hide');
 }
-
