@@ -7,6 +7,7 @@ const initialsForm = document.getElementById('initials-form');
 const initialsInput = document.getElementById('initials');
 const finalScore = document.getElementById('final-score');
 const countdownDisplay = document.getElementById('countdown');
+const playAgainButton = document.getElementById('play-again-btn');
 
 let currentQuestionIndex = 0;
 let time = 100; // in seconds
@@ -14,6 +15,7 @@ let score = 0;
 let timer;
 
 // Questions array
+
 const questions = [
   {
     question: 'What symbol is used for comments in JavaScript?',
@@ -107,12 +109,17 @@ const questions = [
   },
   // Add more questions...
 ];
+
 startButton.addEventListener('click', startGame);
+playAgainButton.addEventListener('click', restartGame);
 initialsForm.addEventListener('submit', saveScore);
 
 function startGame() {
   startButton.classList.add('hide');
   questionContainer.classList.remove('hide');
+  score = 0;
+  time = 100;
+  currentQuestionIndex = 0;
   showQuestion();
   updateTimerDisplay();
   timer = setInterval(updateTimer, 1000);
@@ -126,16 +133,17 @@ function showQuestion() {
 function displayQuestion(question) {
   questionElement.innerText = question.question;
   question.answers.forEach((answer, index) => {
-    answerButtons[index].innerText = answer.text;
-    answerButtons[index].onclick = () => selectAnswer(answer.correct);
+    const button = answerButtons[index];
+    button.innerText = answer.text;
+    button.classList.remove('hide');
+    button.onclick = () => selectAnswer(answer.correct);
   });
 }
 
 function resetState() {
-  endContainer.classList.add('hide');
   answerButtons.forEach(button => {
-    button.classList.remove('correct');
-    button.classList.remove('incorrect');
+    button.classList.add('hide');
+    button.classList.remove('correct', 'incorrect');
   });
 }
 
@@ -171,10 +179,65 @@ function endGame() {
   questionContainer.classList.add('hide');
   endContainer.classList.remove('hide');
   finalScore.innerText = score;
+  playAgainButton.classList.remove('hide');
+  displayScoreboard();
+}
+
+function restartGame() {
+  startGame();
+  endContainer.classList.add('hide');
+  initialsInput.value = '';
 }
 
 function saveScore(event) {
   event.preventDefault();
-  console.log(`Initials: ${initialsInput.value}, Score: ${score}`);
-  // Handle saving scores locally or in a database
+  const initials = initialsInput.value.trim();
+  if (!initials) {
+    console.log("No initials provided.");
+    return; // Prevent saving if initials are empty
+  }
+
+  const savedScores = JSON.parse(localStorage.getItem('quizScores')) || [];
+  const currentScore = { initials: initials, score: score, timestamp: new Date().getTime() };
+  
+  savedScores.push(currentScore);
+
+  // Keep only the last 6 scores
+  if (savedScores.length > 6) {
+    savedScores.sort((a, b) => b.timestamp - a.timestamp);
+    savedScores.splice(6);
+  }
+
+  localStorage.setItem('quizScores', JSON.stringify(savedScores));
+  
+  console.log("Saved score:", currentScore);
+  displayScoreboard();
 }
+
+
+
+function displayScoreboard() {
+  const savedScores = JSON.parse(localStorage.getItem('quizScores')) || [];
+
+  // Sort scores by highest to lowest
+  savedScores.sort((a, b) => b.score - a.score);
+
+  const scoreboard = document.createElement('ol');
+  scoreboard.classList.add('scoreboard');
+
+  savedScores.slice(0, 6).forEach(scoreEntry => {
+    if (scoreEntry && typeof scoreEntry === 'object' && 'initials' in scoreEntry && 'score' in scoreEntry) {
+      const scoreItem = document.createElement('li');
+      scoreItem.textContent = `${scoreEntry.initials}: ${scoreEntry.score}`;
+      scoreboard.appendChild(scoreItem);
+    } else {
+      console.log("Invalid score entry:", scoreEntry);
+    }
+  });
+
+  const scoreboardContainer = document.getElementById('scoreboard');
+  scoreboardContainer.innerHTML = '';
+  scoreboardContainer.appendChild(scoreboard);
+  scoreboardContainer.classList.remove('hide');
+}
+
